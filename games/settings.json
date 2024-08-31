@@ -1,7 +1,7 @@
 {
     "redux": {
         "port": 8080,
-        "path": "C:/path/to/redux/"
+        "path": "G:/GAMES/Play/"
     },
     "nops": {
         "comport": "COM5",
