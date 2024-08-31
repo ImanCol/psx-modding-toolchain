@@ -1,0 +1,186 @@
+guia para configurar toolchain
+
+estructura
+
+game_name
+    build/
+    include/
+        common.h --tal vez importante, para incluir bibliotecas
+    mods/
+        mgs-char/
+            src/
+                hook.s --referencia a function de main.c
+                main.c --function principal
+                math.c 
+                math.h
+            buildList.txt --// version, section, address, offset, path, binary name [optional]
+            Makefile -- /(se genera) index o link para compilar
+            MOD.BAT -- para compilar
+            overlay.id -- (se genera)
+            OTHER -- (se generan)
+    plugins/
+        plugin.py -- (se genera?)
+    symbols/
+        american.txt -- asignar addrs para compilar
+    config.json -- se indexa los simbols y sus regiones
+    disc.json -- se indexa el ejecutable del disco y sus regiones
+common.mk
+settings.json
+startup_game.json
+STARTUP.BAT
+STARTUP.SH
+
+ejemplo incluide:
+common.h
+{
+    #ifndef COMMON_H
+    #define COMMON_H
+
+    struct Vec3
+    {
+        int x;
+        int z;
+        int y;
+    };
+    
+    int sprintf(char * str, char * format, ...);
+    void DrawText(char * text, int x, int y, int colorIndex, int * unk);
+    
+    extern struct Vec3 speed;
+    extern int gameMode;
+    
+    #endif
+}
+
+ejemplo script:
+hook.s
+{
+    .set noreorder
+    j DrawSpeedometer
+
+}
+
+main.c
+{
+    #include <common.h>
+    #include "math.h"
+
+    char buffer[64];
+
+    void DrawSpeedometer()
+    {
+        if (gameMode == 0)
+            {
+                unsigned int horSpeed = (unsigned int) ((speed.x * speed.x) + (speed.z * speed.z));
+                horSpeed = sqrt(horSpeed); //Aqui llama math para alguna operacion (solo si es necesario)
+                int verSpeed = speed.y;
+                sprintf(buffer, "Hor Speed: %u", horSpeed);
+                DrawText(buffer, 0xB0, 0x15, 1, 0);
+                sprintf(buffer, "Ver Speed: %d", verSpeed);
+                DrawText(buffer, 0xB0, 0x35, 1, 0);
+
+            }
+        sprintf(buffer, "Game mode: %u", gameMode);
+        DrawText(buffer, 0xB0, 0x25, 0.5, 0);
+    }
+}
+
+//solo si es necesario
+math.c
+{
+    #include "math.h"
+
+    // Square root of integer
+    // https://en.wikipedia.org/wiki/Integer_square_root
+    
+    unsigned int sqrt(unsigned int s)
+    {
+        //Operacion de sqrt
+    }
+}
+
+math.h
+{
+    #ifndef MATH_H
+    #define MATH_H
+
+    unsigned int sqrt(unsigned int s);
+
+    #endif
+}
+
+ejemplo plugins:
+plugin.py
+{
+    def extract(plugin_path: str, game_path: str, game_version: str) -> None:
+        pass
+
+    def build(plugin_path: str, game_path: str, game_version: str) -> None:
+        pass
+
+}
+
+ejemplo symbols:
+american.txt
+{
+    sprintf = 0x800594ac;
+    DrawText = 0x8004a374;
+    
+    speed = 0x8006a090;
+    gameMode = 0x800681c8;
+}
+
+
+
+ejemplo juego:
+
+config.json
+{
+    {
+        "compiler": {
+            "function_sections": 1,
+            "reorder_functions": 1,
+            "optimization": 4,
+            "debug": 0,
+            "psyq": 0,
+            "mininoob": 0,
+            "8mb": 0
+        },
+        "versions": [
+            {
+                "american": {
+                    "name": "G:/GAMES/Play/Spyro 2 - Ripto's Rage! (USA).bin",
+                    "symbols": [
+                        "american.txt"
+                    ],
+                    "build_id": 94425
+                }
+            }
+        ]
+    }
+}
+
+
+disc.json
+{
+    {
+        "american": [
+            {
+                "SCUS_944.25": [
+                    {
+                        "name": "header",
+                        "address": "0x8000B070",
+                        "offset": "0x0"
+                    },
+                    {
+                        "name": "exe",
+                        "address": "0x80010000",
+                        "offset": "0x800"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+por ahora es toda la config necesaria
