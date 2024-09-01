@@ -1,0 +1,8 @@
+MENU_Color = 0x8003ae48;
+MENU_Locate = 0x8003ae28;
+MENU_Printf = 0x8003af44;
+menu_Text_Init = 0x8003ae98;
+
+position = 0x800ae318;
+SVECTOR = 0x800ae318;
+offset = 0x800ae318;

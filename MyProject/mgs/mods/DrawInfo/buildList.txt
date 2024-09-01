@@ -1,0 +1,3 @@
+// version, section, address, offset, path, binary name [optional]
+american, exe, 0x80029dfc, 0x0, src/hook.s
+american, header, 0x8000B0B8, 0x0, src/main.c, drawinfo.bin
