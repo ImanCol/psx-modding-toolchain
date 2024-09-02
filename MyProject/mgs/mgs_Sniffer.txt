@@ -1,0 +1,46 @@
+mgs 1.0 usa
+0x800adb3c = UI Status (0x00624a00=disable; 0x00624a10 = disable control; 0x00204a00=another)
+0x800adb40 = change floor (0x92)
+0x800adab8 = off screen (0x1: Radio)
+0x800adbac = first Person (0x1=enable)
+0x800adb3c = radar Status (0x1= jamming; 0x20 = no weapon UI)
+0x800adb40 = reboot scene (0x01)
+0x800adb44 = Game Over (0x1)
+
+
+item temp
+0x80165b90 = info item? Counter Ration --> FULL or Flash info
+0x80165b98 = Set is ITEMNAME text anim? (0x240f0180) use counter item (80165b90) to anim
+0x80165b9c = is bool Set is full text anim? (0x240f0180) use counter item (80165b90) to anim
+
+800356e8 = Position text? (only work FULL)
+80035738 = color offset?
+
+Text_Locate
+X=800a0a30
+Y=800a0a34
+Z=800a0a38 //tamaño del string, pero a veces pasa algo raro con la rotacion (leer escritura) unknow rotation o somthing?
+r,g,b,char[64]=800a0a3c
+
+//Lectura
+""al desactivar todas las Menu_Location, 0x800453ac sigue llamando al eje x(800a0a30)
+""Normal, ya que Menu_Prinf consulta esto desde la funcion FUN_8004519c
+""Tambien se llama desde Menu_Location, pero se deshabilita si no se usa, asi que nada
+""para eje Y, se sigue leyendo desde 0x8004534c, tambien perteneciente a la funcion FUN_8004519c
+""se lee Z (Tamaño de string) en 0x8004539c, pertenece a la funcion FUN_8004519c
+""tambien se leen en 0x8003afcc, pertenecen a Menu_Printf; y 0x8003aee8, que se llama por Menu_Printf
+
+//Escritura
+""Se realiza una escritura en 0x800453b8(mi error? es 0x80045a14), no se porque...pero es mejor reasignar la locacion de printf?
+""Se realiza escritura en 0x8003aeac para Z (tamaño string), pertenece a la funcion Menu_Init
+
+""Menu_Init se llama desde la funcion FUN_8003ad70 (en 0x8003ae0c), que a la vez se llama desde FUN_800177dc,
+""y esta desde UndefinedFunction_8001fc3c, que se llama como parametro en 0x8001ff90
+""0x8001ff90 -> UndefinedFunction_8001fc3c --> FUN_800177dc --> FUN_8003ad70
+8003ae0c
+
+
+
+800ae0d8 == Acces Video RAM?
+
+800ae1c8 = status player? (0x0000ff00 = launch C4?)

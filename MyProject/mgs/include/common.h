@@ -15,6 +15,9 @@ void MENU_Locate(short param_1,short param_2, short param_3);
 void MENU_Printf(char * text, ...);
 void menu_Text_Init();
 
+//bool gte_info(long *param_1, SVECTOR *param_2);
+int gte_info(long *param_1, long *param_2);
+
 extern struct Vec3 position;
 extern struct Vec3 SVECTOR;
 

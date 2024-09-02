@@ -73,6 +73,11 @@ void DrawInfo()
         change_color();
     }
 
+
+
+
+    #define playeroffset ((char *)0x800ae318[0]);
+
     //int getinfo = lseek(1, 0x800ae318,  1)
     
 	if (set > 100   )
@@ -81,6 +86,11 @@ void DrawInfo()
 	}
 
 	set += 1;
+
+    //int counter = main();
+
+	unsigned int horSpeed = (unsigned int) ((position.x * position.x) + (position.z * position.z));
+	//horSpeed = sqrt(horSpeed);
 
     //amerinca.txt : offset = 0x800ae318
     unsigned int * PlayerPointer = (unsigned int *) offset; // get Pointer Player Position
@@ -94,13 +104,37 @@ void DrawInfo()
     unsigned int PlayerY = PlayerPostXY & 0xFFFF;          // Parte baja (16 bits menos significativos)
     unsigned int PlayerZ = PlayerPostZ & 0xFFFF;          // Parte baja (16 bits menos significativos)
 
+//short sVar1;
+//short sVar2;
+//char *pcVar4;
+//unsigned int *puVar7;
+//unsigned int auStack_28 [24];
+//puVar7 = auStack_28;
+//
+//short sVar1_;
+////MATRIX *r0;
+//unsigned int uVar2_;
+//unsigned int uVar3_;
+//unsigned int uVar4_;
+//char *pcVar5_;
+//int *puVar6_;
+//int auStack_28_ [24];
+//
+//
+//
+//
+//
+//ar1 = *(short *)(PlayerPointer + 0x12) - (short)*(int *)(0x800b4174 + 0x130);
+//ar2 = *(short *)(PlayerPointer + 0x12) + -0x10;
+
+*(short *)(puVar7 + 0x12) = sVar2;
 
 	//MENU_Color(0xff,0x30,0x30);
 	MENU_Color(255,255,255);
 	MENU_Locate(0x7f, 0x8,0x1);
 	//MENU_Printf("%s 0x%d",pcVar5, SnakePostOffset);
 	//MENU_Printf("Addrs:  0x%X Pointer:  0x%X Value: 0x%X",PlayerX, PlayerY, PlayerZ);
-	MENU_Printf("Player Position\n X: %d Y: %d Z: %d \n Color: %X",PlayerX, PlayerY, PlayerZ, current_color);
+	MENU_Printf("Player Position\n X: %d Y: %d Z: %d \n Var1: %X",PlayerX, PlayerY, PlayerZ, puVar7);
 	menu_Text_Init();
 
 	//unsigned int off = (unsigned int) offset;
@@ -109,7 +143,7 @@ void DrawInfo()
 	short puVar6 = set;
 	//MENU_Color(0xff,0x30,0x30);
 	MENU_Color(255,255,255);
-	//MENU_Locate(*(short *)(puVar7 + 0x10) + 0xa0,*(short *)(puVar7 + 0x12) + 0x68,0x12);
+	MENU_Locate(*(short *)(puVar7 + 0x10) + 0xa0,*(short *)(puVar7 + 0x12) + 0x68,0x12);
 	//MENU_Locate(PlayerX, PlayerY, 0x1);
 	//MENU_Printf("%s 0x%d",pcVar5, SnakePostOffset);
 	//MENU_Printf("Addrs:  0x%X Pointer:  0x%X Value: 0x%X",PlayerX, PlayerY, PlayerZ);
@@ -131,29 +165,74 @@ void DrawInfo()
 	MENU_Printf("%s",pcVar5);
 	
 	menu_Text_Init();
+	
+
+	/*
+
+	//short pos[2];
+	//SVECTOR position; // PlayerPosition
+	//const char *pText;
+	//CONTROL *pCtrl;
+	//int vx;
+	//int state;
+	//int x, y ,z;
+	//char *pOt;
+	//LINE_F4* pLine;
+	//int newx, newy;
+
+	
+	//undefined *puVar6;
+	//undefined auStack_28 [24];
+	
+	//puVar6 = auStack_28;
+	
+	MENU_Color(0xff,0x30,0x30);
+	MENU_Locate((140 + 0x10) + 0xa0,(174 + 0x12) + 0x68,0x12);
+	//MENU_Locate((10 + 0x10) + 0xa0, (10 + 0x12) + 0x68,0x12);
+	MENU_Printf("FULL");
+	menu_Text_Init();
+
+	MENU_Locate_FUN_8003ae28(*(short *)(puVar6 + 0x10) + 0xa0,*(short *)(puVar6 + 0x12) + 0x68,0x12)
+	;
+	MENU_Printf__FUN_8003af44(pcVar5);
+	MENU_Color_FUN_8003ae48(1,1,1);
+	MENU_Locate_FUN_8003ae28(*(short *)(puVar6 + 0x10) + 0xa1,*(short *)(puVar6 + 0x12) + 0x69,0x12)
+	;
+	MENU_Printf__FUN_8003af44(pcVar5);
+	menu_Text_Init_FUN_8003ae98();
+	
+	*/
+
+
 }
 
-void SnakeTag()
-{
-    Color rgb;
 
-    int iVar3;
-char * uVar11;
-    rgb.r = 0xff;
-    rgb.g = 0x30;
-    rgb.b = 0x30;
-    short sStack_38;
-    short sStack_36;
-    
-    iVar3 = gte_info(&sStack_38,offset + 0x20);
-    
-    //sStack_36 = sStack_36 - *(short *)(offset + 0x110);
+int main() {
+    int x = 0, y = 0;  // Posición inicial
+    int dx = SPEED_X, dy = SPEED_Y;  // Dirección de movimiento
 
-    MENU_Color(rgb.r,rgb.g,rgb.b);
-    MENU_Locate(sStack_38 + 0xa0,sStack_36 + 0x68,0x12);
-    MENU_Printf(uVar11);
-    MENU_Color(1,1,1);
-    MENU_Locate(sStack_38 + 0xa1,sStack_36 + 0x69,0x12);
-    MENU_Printf(uVar11);
-    menu_Text_Init();
+    while (1) {
+        // Borrar pantalla
+        //printf("\033[H\033[J");
+
+        // Imprimir la posición actual del "logo"
+        //printf("Logo Position: (%d, %d)\n", x, y);
+
+        // Actualizar la posición
+        x += dx;
+        y += dy;
+
+        // Verificar colisiones con los bordes y rebotar
+        if (x >= MAX_X || x <= MIN_X) {
+            dx = -dx;
+        }
+        if (y >= MAX_Y || y <= MIN_Y) {
+            dy = -dy;
+        }
+
+        // Simular la animación (sleep para esperar un momento)
+        //usleep(50000);  // 50ms delay
+    }
+
+    return 0;
 }

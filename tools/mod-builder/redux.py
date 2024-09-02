@@ -178,11 +178,14 @@ class Redux:
 
     def inject(self, backup: bool, restore: bool) -> None:
         build_id = get_build_id()
+        print("build id: " , build_id)
         if build_id is None:
             print("\n[Redux-py] ERROR: No output files found. Make sure that you have compiled your mod before trying to hot reload.\n")
             return
         sym = Syms(get_build_id())
+        print("sym: " , sym)
         url = self.url + "/api/v1/cpu/ram/raw"
+        print("url: " , url)
         psx_ram = bytearray()
         if backup:
             response = requests.get(url)
