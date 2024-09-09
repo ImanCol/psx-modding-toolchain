@@ -1,3 +1,4 @@
+sprintf = 0x80091304;
 MENU_Color = 0x8003ae48;
 MENU_Locate = 0x8003ae28;
 MENU_Printf = 0x8003af44;

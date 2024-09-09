@@ -1,2 +1,2 @@
 .set noreorder
-j DrawInfo
+j Init
