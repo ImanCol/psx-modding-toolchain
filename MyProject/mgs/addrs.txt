@@ -1,0 +1,8 @@
+mgs 1.0 usa
+0x800adb3c = UI Status (0x00624a00=disable; 0x00624a10 = disable control; 0x00204a00=another)
+0x800adb40 = change floor (0x92)
+0x800adab8 = off screen (0x1: Radio)
+0x800adbac = first Person (0x1=enable)
+0x800adb3c = radar Status (0x1= jamming; 0x20 = no weapon UI)
+0x800adb40 = reboot scene (0x01)
+0x800adb44 = Game Over (0x1)
