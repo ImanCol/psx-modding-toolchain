@@ -1,0 +1,7 @@
+tyjht 1.0 usa
+0x XX = sprintf pero solo valido para algunas iconos?
+
+//info Player
+//any (player_param1)
+XX = anyinfo
+XX = anyinfo

@@ -1,0 +1,2 @@
+sprintf = 0x8005fa9c;
+postString = 0x801ed73c;
