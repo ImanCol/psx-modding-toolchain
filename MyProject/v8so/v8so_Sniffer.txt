@@ -1,0 +1,131 @@
+v8so 1.0 usa
+0x 8005fa9c = sprintf pero solo valido para algunas iconos?
+
+//SElect Player
+//Paint (player_param1)
+0x801F55D8 = WonderWogan
+0x801A9028 = Thunderbolt
+0x8019A9E0 = Dakota Stunt Cycle
+0x80192B78 = Samson Tow Truck
+0x80189388 = Livingston Truck
+0x801825E0 = Xanadu RV
+0x8017AB48 = Palomino XIII
+0x80173498 = El Guerrero
+0x8016AC30 = Blue Burro Bus
+0x80163878 = Excelsior Stretch
+0x80157B58 = Tsunami
+0x80151658 = Marathon
+0x801461B8 = Moon Trekker
+0x8013CB58 = Grubb Dual Loader
+0x801356A0 = Chrono Stinger
+0x8012E1F0 = Vertigo
+0x801227B0 = Goliath Halfttrack
+0x8011CF00 = Wapiti 4WD
+
+
+//Paint (Bots- Player_param1)
+0x801F55D8 = WonderWogan
+0x801A9028 = Thunderbolt
+0x801a0da0 = Dakota Stunt Cycle
+0x801975f0 = Samson Tow Truck
+0x8018dda8 = Livingston Truck
+0x80187020 = Xanadu RV
+0x8017f840 = Palomino XIII
+0x80177e80 = El Guerrero
+0x8016f660 = Blue Burro Bus
+0x80168280 = Excelsior Stretch
+0x8015ddb0 = Tsunami
+0x80156028 = Marathon
+0x8014af90 = Moon Trekker
+0x801416d0 = Grubb Dual Loader
+0x8013a0d0 = Chrono Stinger
+0x80132c10 = Vertigo
+0x801273a0 = Goliath Halfttrack
+0x80121888 = Wapiti 4WD
+
+- STATIC
+- bot1
+8016baa0 Chrono
+80197c38 Palomino
+8017c960 Rover
+80190278 guerrero
+
+- bot2
+801a0da0 Dakota
+801730a0 Basurero
+
+- bot3
+8016baa0 Chrono
+
+
+- PREVIEW
+- bot1
+801a0da0 Dakota
+80197c38 _
+80197c38 Palomino
+80190278 Guerrero
+80187a58 Bus
+8017c960 _
+801730a0 Basurero
+8016baa0 Chrono
+801a0da0 Dakota
+
+- Bot2
+801ffcfb Dakota?
+80197c38 Palomino
+8016baa0 Chrono
+
+- Bot3
+80197c38 Palomino
+801a0da0 Dakota
+
+- in 80197c38 --> out 80161600 Palomino
+- in 80190278 --> out 80161600 Guerrero
+
+
+
+- dELTA byte
+//Select Driver
+header: 38000000
+init 01000000 //search addres here
+id :
+a8dd1880 livingston truck 
+40f81780 palomino xiii
+
+//GamePlay
+header: 49000000
+init _
+id :
+985a1e80 Palomino?
+
+LUXO_COLOR == UNlock rainbow color?
+
+item temp
+0x XXXXXXXX = info item? Counter Ration --> FULL or Flash info
+
+- Text_Locate
+- X=XXXXXXXX
+- Y=XXXXXXXX
+- Z=XXXXXXXX //
+//r,g,b,char[64]=800a0a3c
+
+//Lectura
+""al desactivar todas las Menu_Location, 0x800453ac sigue llamando al eje x(800a0a30)
+""Normal, ya que Menu_Prinf consulta esto desde la funcion FUN_8004519c
+""Tambien se llama desde Menu_Location, pero se deshabilita si no se usa, asi que nada
+""para eje Y, se sigue leyendo desde 0x8004534c, tambien perteneciente a la funcion FUN_8004519c
+""se lee Z (Tamaño de string) en 0x8004539c, pertenece a la funcion FUN_8004519c
+""tambien se leen en 0x8003afcc, pertenecen a Menu_Printf; y 0x8003aee8, que se llama por Menu_Printf
+
+//Escritura
+""Se realiza una escritura en 0x800453b8(mi error? es 0x80045a14), no se porque...pero es mejor reasignar la locacion de printf?
+""Se realiza escritura en 0x8003aeac para Z (tamaño string), pertenece a la funcion Menu_Init
+
+""Menu_Init se llama desde la funcion FUN_8003ad70 (en 0x8003ae0c), que a la vez se llama desde FUN_800177dc,
+
+0x XXXXXXXX
+
+
+XXXXXXXX == Acces Video RAM?
+
+XXXXXXXX = status player? (0x0000ff00 = launch C4?)
