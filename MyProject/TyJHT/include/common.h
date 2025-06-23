@@ -20,6 +20,19 @@ typedef struct {		/* short word type 3D vector */
 	short	vz, pad;
 } SVECTOR;
 
+typedef struct {
+  uint8_t minute;	// Minutes (BCD)
+  uint8_t second;	// Seconds (BCD)
+  uint8_t sector;	// Sector or frame (BCD)
+  uint8_t track;	// Track number
+} CdlLOC;
+
+typedef struct {
+	CdlLOC	pos;		// CD-ROM position coordinates of file
+	int		size;		// Size of file in bytes
+	char	name[16];	// File name
+} CdlFILE;
+
 int sprintf(char * str, char * format, ...);
 
 //void MENU_Color(int r,int g,int b); //MGS
