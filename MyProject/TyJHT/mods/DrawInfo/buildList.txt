@@ -1,5 +1,14 @@
 // version, section, address, offset, path, binary name [optional]
 //old 80029dfc mgs //open select enemy 0x801defd0
 //Loading 80160530
-american, exe, 0x800XXXXX, 0x0, src/hook.s
-american, header, 0x8000B0B8, 0x0, src/main.c, drawinfo.bin
+//american, exe, 0x80017a60, 0x0, src/hook_CdSearchFile.s
+//american, exe, 0x8001d400, 0x0, src/hook_8001d400.s
+//american, exe, 0x8003f544, 0x0, src/hook_8003f544.s
+//american, exe, 0x80017b1c, 0x0, src/hook_80017b1c.s
+american, exe, 0x80017b7c, 0x0, src/hook_80017b7c.s
+american, exe, 0x80017bfc, 0x0, src/hook_80017bfc.s
+//CD_getsector
+//american, exe, 0x8001ab50, 0x0, src/hook_8001ab48.s
+//search sector, size file resource.res
+american, exe, 0x800128cc, 0x0, src/hook_800128cc.s
+american, header, 0x8000B0B8, 0x0, src/main.c, drawinfo.bin8001d400
